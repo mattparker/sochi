@@ -10,107 +10,12 @@
 <body>
 
 <h1>Sochi and ...</h1>
-
+<button id="render">draw</button>
 <div id="graph"></div>
 
 
 
-<script type="text/javascript">
-
-    YUI().use("node", function (Y) {
-
-        var data = {
-                "GB": {
-                    "medals": 14,
-                    "hdi_rank": 15
-                },
-                "RUS": {
-                    "medals": 3,
-                    "hdi_rank": 60
-                }
-            },
-
-            maxValues = {
-                hdi_rank: 20,
-                medals: 25
-            },
-
-            comparison = "hdi_rank",
-            template = '<span class="flag"></span>',
-            graphNode = Y.one('#graph'),
-
-            graphWidth,
-            graphHeight,
-
-            notchHeight,
-            notchWidth,
-
-            calculateDimensions = function () {
-
-                graphWidth = graphNode.get("width");
-                graphHeight = graphNode.get("height");
-
-                notchHeight = graphHeight / maxValues[comparison];
-                notchWidth = graphWidth / maxValues.medals
-
-            },
-
-
-            /**
-             * Finds the top co-ord
-             * @param flagData
-             * @param key
-             */
-            calculateTop = function (flagData, key) {
-                return parseInt(flagData[key] * notchHeight, 10);
-
-            },
-
-
-            /**
-             * Calculates left
-             * @param flagData
-             */
-            calculateLeft = function (flagData) {
-                return parseInt(flagData.medals * notchWidth, 10);
-            },
-
-
-            /**
-             * Renders the flags
-             */
-            render = function () {
-
-                var i,
-                    flagNode;
-
-                for (i in data) {
-                    if (data.hasOwnProperty(i)) {
-
-                        flagNode = Y.one('#graph .' + i);
-
-                        if (!flagNode) {
-
-                            flagNode = Y.Node.create(template);
-                            flagNode.addClass(i);
-                            graphNode.append(flagNode);
-
-                        }
-
-                        flagNode.set("top", calculateTop(data[i], comparison));
-                        flagNode.set("left", calculateLeft(data[i]));
-                    }
-                }
-            };
-
-
-        calculateDimensions();
-        render();
-
-
-
-    });
-
-</script>
+<span style="position:absolute; bottom:0;" id="atthebottom"></span>
+<script src="js/sochi.js"></script>
 </body>
 </html>

@@ -1,0 +1,40 @@
+body{
+    width:100%;
+    height:100%;
+}
+#graph {
+    height: 80%;
+    width: 80%;
+    position: relative;
+    margin: 0 auto;
+}
+
+.flag {
+    height: 10px;
+    width: 10px;
+    position: absolute;
+}
+
+.quadrant{
+    opacity: 0.4;
+    position: absolute;
+}
+.q0 {
+    background-color: #a3e;
+    padding: 20px 0 0 20px;
+    margin: -20px;
+}
+.q1 {
+    background-color: #842;
+    padding: 0 0 20px 20px;
+    margin: 0 -20px;
+}
+.q2 {
+    background-color: #d10;
+    padding: 0 20px 20px 0;
+}
+.q3 {
+    background-color: #ff2;
+    padding: 20px 20px 0 0;
+    margin-top:-20px;
+}
