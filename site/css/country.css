@@ -1,0 +1,61 @@
+
+
+
+
+
+.pad {
+    padding: 2%;
+}
+
+
+#image_holder {
+    margin-bottom: 40px;
+}
+#image_holder img {
+    width: 100%;
+}
+#image_holder a {
+    text-decoration: none;
+    color: #333333;
+    font-size: 90%;
+}
+
+.medals {
+    text-align:center;
+    font-size:200%;
+    font-weight:bold;
+}
+.circle {
+    margin: 0 auto 10px auto;
+}
+
+.bar {
+    height: 60px;
+    line-height: 300%;
+    text-align:left;
+}
+.bar.medals {
+    background-color: #ff3e3f;
+}
+.bar.cpi {
+    background-color: #8bacff;
+}
+.bar.hdi {
+    background-color: #ffa442;
+}
+.bar {
+    color: #333;
+    font-size:90%;
+}
+.bar span {
+    border-right: 5px solid black;
+    display: inline-block;
+    background-color: white;
+    height: 56px;
+    padding-top: 4px;
+    text-align:center;
+    font-size: 150%;
+    color: #111;
+    font-weight: bold;
+    padding-right: 3px;
+}

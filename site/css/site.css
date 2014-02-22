@@ -4,7 +4,7 @@ body{
 }
 #graph {
     height: 80%;
-    width: 80%;
+    width: 90%;
     position: relative;
     margin: 0 auto;
 }
@@ -16,25 +16,23 @@ body{
 }
 
 .quadrant{
-    opacity: 0.4;
+    opacity: 0.8;
     position: absolute;
 }
 .q0 {
-    background-color: #a3e;
+
     padding: 20px 0 0 20px;
     margin: -20px;
 }
 .q1 {
-    background-color: #842;
+
     padding: 0 0 20px 20px;
     margin: 0 -20px;
 }
 .q2 {
-    background-color: #d10;
     padding: 0 20px 20px 0;
 }
 .q3 {
-    background-color: #ff2;
     padding: 20px 20px 0 0;
     margin-top:-20px;
 }
@@ -43,6 +41,8 @@ body{
 
 h1 {
     vertical-align: top;
+    width:90%;
+    margin:20px auto;
 }
 
 
@@ -62,7 +62,7 @@ h1 {
     display:inline-block;
     background-color:#fff;
     padding-right:40px;
-    color: #444;
+    color: #787878;
     cursor:pointer;
 }
 #dataselector li.selected {

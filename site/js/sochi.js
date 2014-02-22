@@ -71,7 +71,8 @@ YUI().use("node", "event-resize",'scrollview-base','scrollview-paginator', funct
 
             var i,
                 title = '',
-                flagNode;
+                flagNode,
+                flagContent = '';
 
             for (i in data) {
                 if (data.hasOwnProperty(i) && data[i].medals !== undefined) {
@@ -83,7 +84,10 @@ YUI().use("node", "event-resize",'scrollview-base','scrollview-paginator', funct
                         flagNode = Y.Node.create(template);
                         flagNode.addClass(i);
                         title = data[i].country_name;
-                        flagNode.setContent('<img src="img/' + data[i].image_name + '.png" title = "' + title + '" alt="' + i + '"/>');
+                        flagContent = '<a href="country/' + data[i].country_name.replace(" ", "_") + '.html"/>';
+                        flagContent += '<img src="img/' + data[i].image_name + '.png" title = "' + title + '" alt="' + i + '"/>';
+                        flagContent += '</a>';
+                        flagNode.setContent(flagContent);
                         graphNode.append(flagNode);
 
                     }
@@ -102,10 +106,10 @@ YUI().use("node", "event-resize",'scrollview-base','scrollview-paginator', funct
                 ht = parseInt(graphHeight / 2, 10) + "px",
                 wd = parseInt(graphWidth/ 2, 10) + "px",
                 pos = {
-                    0: {top: 0, left:0, width: wd, height: ht, title: "Mud wrestling on ice!"},
-                    1: {top: ht, left: 0, width: wd, height: ht, title: "Soap bobsled"},
-                    2: {top: ht, left: wd, width: wd, height: ht, title: "Curling"},
-                    3: {top: 0, left: wd, width: wd, height: ht, title: "Corrupt and rubbish"}
+                    0: {top: 0, left:0, width: wd, height: ht, title: "Mud wrestling on ice!", cl: "silver"},
+                    1: {top: ht, left: 0, width: wd, height: ht, title: "Soap bobsled", cl: "gold"},
+                    2: {top: ht, left: wd, width: wd, height: ht, title: "Curling", cl: "silver"},
+                    3: {top: 0, left: wd, width: wd, height: ht, title: "Mucking out the reindeer", cl: "bronze"}
                 };
 
             for (;i < 4; i++) {
@@ -114,7 +118,7 @@ YUI().use("node", "event-resize",'scrollview-base','scrollview-paginator', funct
                     quadNode = Y.Node.create(qTempl);
                     quadNode.addClass("q" + i);
                     quadNode.setAttribute("title", pos[i].title);
-
+                    quadNode.addClass(pos[i].cl);
                     graphNode.append(quadNode);
                 }
                 quadNode.setStyles(pos[i]);
@@ -167,10 +171,12 @@ YUI().use("node", "event-resize",'scrollview-base','scrollview-paginator', funct
 
     // change indicator
     Y.one("#dataselector").delegate("click", function (ev) {
-        comparison = ev.target.getData("key");
-        init();
-        Y.all("#dataselector li").removeClass("selected");
-        ev.target.addClass("selected");
+        if (Math.abs(scroller.lastScrolledAmt) < 2) {
+            comparison = ev.target.getData("key");
+            init();
+            Y.all("#dataselector li").removeClass("selected");
+            ev.target.addClass("selected");
+        }
 
     }, "li");
 
