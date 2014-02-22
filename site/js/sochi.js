@@ -1,7 +1,7 @@
 
-YUI().use("node", "event-resize", function (Y) {
+YUI().use("node", "event-resize",'scrollview-base','scrollview-paginator', function (Y) {
 
-    var data = {
+    var data = SOCHIDATA, /*{
             "GB": {
                 "medals": 1,
                 "hdi_rank": 1
@@ -10,14 +10,15 @@ YUI().use("node", "event-resize", function (Y) {
                 "medals": 25,
                 "hdi_rank": 20
             }
-        },
+        },*/
 
         maxValues = {
-            hdi_rank: 20,
-            medals: 25
+            hdi_rank: 101,
+            cpi_rank: 150,
+            medals: 30
         },
 
-        comparison = "hdi_rank",
+        comparison = "cpi_rank",// "hdi_rank",
         template = '<span class="flag">.</span>',
         graphNode = Y.one('#graph'),
 
@@ -59,7 +60,7 @@ YUI().use("node", "event-resize", function (Y) {
          * @param flagData
          */
          calculateLeft = function (flagData) {
-            return parseInt((flagData.medals - 1) * notchWidth, 10);
+            return parseInt((flagData.medals.medals_rank - 1) * notchWidth, 10);
          },
 
 
@@ -69,10 +70,11 @@ YUI().use("node", "event-resize", function (Y) {
          render = function () {
 
             var i,
+                title = '',
                 flagNode;
 
             for (i in data) {
-                if (data.hasOwnProperty(i)) {
+                if (data.hasOwnProperty(i) && data[i].medals !== undefined) {
 
                     flagNode = Y.one('#graph .' + i);
 
@@ -80,7 +82,8 @@ YUI().use("node", "event-resize", function (Y) {
 
                         flagNode = Y.Node.create(template);
                         flagNode.addClass(i);
-                        flagNode.setContent('<img src="img/' + i.toLowerCase().substr(0, 2) + '.png" alt="' + i + '"/>');
+                        title = data[i].country_name;
+                        flagNode.setContent('<img src="img/' + data[i].image_name + '.png" title = "' + title + '" alt="' + i + '"/>');
                         graphNode.append(flagNode);
 
                     }
@@ -99,10 +102,10 @@ YUI().use("node", "event-resize", function (Y) {
                 ht = parseInt(graphHeight / 2, 10) + "px",
                 wd = parseInt(graphWidth/ 2, 10) + "px",
                 pos = {
-                    0: {top: 0, left:0, width: wd, height: ht},
-                    1: {top: ht, left: 0, width: wd, height: ht},
-                    2: {top: ht, left: wd, width: wd, height: ht},
-                    3: {top: 0, left: wd, width: wd, height: ht}
+                    0: {top: 0, left:0, width: wd, height: ht, title: "Mud wrestling on ice!"},
+                    1: {top: ht, left: 0, width: wd, height: ht, title: "Soap bobsled"},
+                    2: {top: ht, left: wd, width: wd, height: ht, title: "Curling"},
+                    3: {top: 0, left: wd, width: wd, height: ht, title: "Corrupt and rubbish"}
                 };
 
             for (;i < 4; i++) {
@@ -110,6 +113,7 @@ YUI().use("node", "event-resize", function (Y) {
                 if (!quadNode) {
                     quadNode = Y.Node.create(qTempl);
                     quadNode.addClass("q" + i);
+                    quadNode.setAttribute("title", pos[i].title);
 
                     graphNode.append(quadNode);
                 }
@@ -122,17 +126,52 @@ YUI().use("node", "event-resize", function (Y) {
 
 
 
-
+        // The main render for the graph
         init = function () {
             calculateDimensions();
             renderQuadrants();
             render();
         };
 
-    Y.one('#render').on('click', init);
-
     Y.on('windowresize', init);
 
+    // Lets render something
+    init();
 
+
+
+
+
+
+
+
+    ////////////////////////////////////
+    // Scrollview
+    var scroller = new Y.ScrollView({
+        id: "scrollview",
+        srcNode: "#dataselector",
+        //height: 30,
+        width: "50%",
+        flick: {
+            minDistance: 10,
+            minVelocity: 0.3,
+            axis: "x"
+        }
+
+    });
+
+    scroller.plug(Y.Plugin.ScrollViewPaginator, {
+        selector: 'li'
+    });
+    scroller.render();
+
+    // change indicator
+    Y.one("#dataselector").delegate("click", function (ev) {
+        comparison = ev.target.getData("key");
+        init();
+        Y.all("#dataselector li").removeClass("selected");
+        ev.target.addClass("selected");
+
+    }, "li");
 
 });

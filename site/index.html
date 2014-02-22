@@ -7,15 +7,23 @@
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.4.2/pure-min.css">
     <link rel="stylesheet" href="css/site.css">
 </head>
-<body>
+<body class="yui3-skin-sam">
 
-<h1>Sochi and ...</h1>
-<button id="render">draw</button>
+<h1>Sochi and ...
+    <div id="dataselector" class="yui3-scrollview-loading">
+        <ul>
+            <li class="selected" data-key="cpi_rank">Corruption</li>
+            <li data-key="hdi_rank">Human Development</li>
+        </ul>
+    </div>
+</h1>
+
 <div id="graph"></div>
 
 
 
 <span style="position:absolute; bottom:0;" id="atthebottom"></span>
+<script src="js/sochi-data.js"></script>
 <script src="js/sochi.js"></script>
 </body>
 </html>
