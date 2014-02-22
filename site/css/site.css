@@ -73,3 +73,9 @@ h1 {
     *display:inline;
     *zoom:1;
 }
+
+.notes {
+    margin: 50px auto;
+    width: 60%;
+
+}
