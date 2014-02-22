@@ -29,7 +29,11 @@ foreach ($data->data as $d) {
         'gold' => $d->medals->gold,
         'silver' => $d->medals->silver,
         'bronze' => $d->medals->bronze,
-        'total' => $d->medals->total
+        'total' => $d->medals->total,
+        'gold_circlesize' => (int)$d->medals->gold * 15,
+        'silver_circlesize' => (int)$d->medals->silver * 15,
+        'bronze_circlesize' => (int)$d->medals->bronze * 15,
+        'description' => $d->description
     );
 
 }
@@ -59,8 +63,13 @@ foreach ($sortedData as $d) {
     if (!array_key_exists($d['abbr'], $existingData)) {
         $existingData[$d['abbr']] = array();
     }
+    $existingData[$d['abbr']]['country_description'] = $d['description'];
+    unset($d['description']);
+
     $d['medals_rank'] = $i;
     $existingData[$d['abbr']]['medals'] = $d;
+
+
 
     $i++;
 }

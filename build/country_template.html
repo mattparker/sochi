@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{country_name}} :: Sochi and related...</title>
+    <script src="http://yui.yahooapis.com/3.14.1/build/yui/yui-min.js"></script>
+
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.4.2/pure-min.css">
+    <link rel="stylesheet" href="../css/country.css">
+    <link rel="stylesheet" href="../css/colour.css">
+</head>
+<body>
+
+
+<div class="pure-g-r header">
+
+    <div class="pure-u-1-4">
+        <div class="pad">
+        <h1>{{country_name}}</h1>
+
+        <p><img src="../img/{{image_name}}.png" alt="Flag for {{country_name}}"/> :: {{abbr}}</p>
+        </div>
+    </div>
+
+    <div class="pure-u-3-4">
+        <div id="image_holder">{{flickr_photo}}</div>
+    </div>
+
+</div>
+
+<div class="pure-g-r medallist">
+
+    <div class="pure-u-1-3 medals">
+        <div class="circle gold" style="height: {{medals.gold_circlesize}}px;
+        width: {{medals.gold_circlesize}}px; border-radius: {{medals.gold_circlesize}}px;">{{medals.gold}}</div>
+    </div>
+    <div class="pure-u-1-3 medals">
+        <div class="circle silver" style="width: {{medals.silver_circlesize}}px;
+        height: {{medals.silver_circlesize}}px; border-radius: {{medals.silver_circlesize}}px;">{{medals.silver}}</div>
+    </div>
+    <div class="pure-u-1-3 medals">
+        <div class="circle bronze" style="width: {{medals.bronze_circlesize}}px;
+        height: {{medals.bronze_circlesize}}px; border-radius: {{medals.bronze_circlesize}}px;">{{medals.bronze}}</div>
+    </div>
+</div>
+
+<div>
+    <p class="pad">{{country_description}}</p>
+</div>
+
+
+<div>
+    <div class="pad">
+        <h2>How they do</h2>
+
+        <div class="bar medals">
+            <span style="width: {{medals.medals_percent}}%">{{medals.medals_rank}}</span>
+            Medals
+        </div>
+        <div class="bar cpi">
+            <span  style="width: {{cpi_percent}}%">{{cpi_rank}}</span>
+            Corruption
+        </div>
+        <div class="bar hdi">
+            <span  style="width: {{hdi_percent}}%">{{hdi_rank}}</span>
+            Human development
+        </div>
+    </div>
+</div>
+<script src="../js/country.js"></script>
+</body>
+</html>
